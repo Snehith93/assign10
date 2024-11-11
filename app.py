@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 def hello_world():
 
-    return "Hello Chinni"
+    return "Hello Snehith. Testing app.py"
 
 if __name__ == "__main__":
 
