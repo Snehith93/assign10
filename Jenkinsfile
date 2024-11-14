@@ -1,18 +1,18 @@
 pipeline {
-    agent { label 'node_slave' }
+    agent { label 'slave-node' }
 
     environment {
         ECR_REPO = '866934333672.dkr.ecr.ca-central-1.amazonaws.com/snehith-assign10'          // Replace with your actual ECR URL
         IMAGE_NAME = 'flask-app'
         TAG = "${env.BRANCH_NAME}-${env.BUILD_ID}"
-        PORT = "${env.BRANCH_NAME == 'dev' ? '5001' : env.BRANCH_NAME == 'staging' ? '5002' : '5003'}"
+        PORT = "${env.BRANCH_NAME == 'DEV' ? '5001' : env.BRANCH_NAME == 'STAGING' ? '5002' : '5003'}"
         CONTAINER_NAME = "${IMAGE_NAME}-${env.BRANCH_NAME}"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: "${env.BRANCH_NAME}", url: 'https://github.com/Snehith93/assign10.git' // Replace with your GitHub repository URL
+                git branch: "${env.BRANCH_NAME}", url: 'https://github.com/Snehith93/assign10.git' // GitHub repository URL
             }
         }
 
