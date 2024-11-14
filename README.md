@@ -2,7 +2,7 @@
 
 This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting development, staging, and production environments. The pipeline handles code build, scan, Docker image creation, ECR image storage, and deployment to EC2 instances, with GitHub webhooks for automated builds.
 
-## Table of Contents
+## Table of Contents:
 - [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
@@ -16,7 +16,7 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
 
 ---
 
-## Architecture
+## Architecture:
 
 - **Jenkins Master & Slave EC2 Instances**: T3 large instances in the Canada (ca-central-1) region.
 - **Jenkins Pipeline**: Multi-branch pipeline to automate CI/CD for different branches (dev, staging, main).
@@ -33,9 +33,7 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
 - SSH access to EC2 instances.
 - Jenkins knowledge and basic Docker experience.
 
-## Setup Instructions
-
-### 1. GitHub Repository Setup
+### 1. GitHub Repository Setup:
 
 #### Step 1.1: Create GitHub Repository and Branches
 
@@ -48,9 +46,9 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
    - Go to **Settings > Branches**.
    - Add branch protection rules for `dev`, `staging`, and `main` to require pull requests and status checks.
 
-### 2. EC2 Instances for Jenkins
+### 2. EC2 Instances for Jenkins:
 
-#### Step 2.1: Jenkins Master Setup
+#### Step 2.1: Jenkins Master Setup:
 
 1. **Launch EC2 Instance**:
    - Instance type: Amazon Linux AMI, t3.large
@@ -77,7 +75,7 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
      ```
    - Access Jenkins: `http://<Jenkins-Master-EC2-Public-IP>:8080`.
 
-#### Step 2.2: Jenkins Slave (Agent) Setup
+#### Step 2.2: Jenkins Slave (Agent) Setup:
 
 1. **Launch Jenkins Agent EC2 Instance**:
    - Instance type: Amazon Linux AMI, t3.large
@@ -92,7 +90,7 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
    - Generate SSH key pair on the master instance and copy the public key to the agent instance.
    - Add Jenkins Agent in the Jenkins UI under **Manage Nodes and Clouds** with SSH credentials.
 
-### 3. IAM Roles and Policies
+### 3. IAM Roles and Policies:
 
 1. **Create IAM Role**:
    - Role Name: `Jenkins-EC2-Role`
@@ -100,7 +98,7 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
 2. **Attach IAM Role**:
    - Assign the IAM role to both Jenkins Master and Slave EC2 instances.
 
-### 4. Jenkins Multi-Branch Pipeline Configuration
+### 4. Jenkins Multi-Branch Pipeline Configuration:
 
 1. **GitHub Webhook Setup**:
    - Go to **GitHub > Settings > Webhooks** and add the webhook URL: `http://<Jenkins-Master-EC2-Public-IP>:8080/github-webhook/`.
@@ -113,7 +111,7 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
 
 ---
 
-## Pipeline Stages
+## Pipeline Stages:
 
 1. **Checkout**: Clones the code from GitHub.
 2. **Build Docker Image**: Builds the Docker image for the application.
@@ -123,13 +121,13 @@ This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting de
 6. **Test**: Deploys the application for testing.
 7. **Deploy**: Deploys to production if the branch is `main`.
 
-## Testing and Validation
+## Testing and Validation:
 
 1. **Create PRs**: Verify automatic triggers for `dev`, `staging`, and `main`.
 2. **Email Notification**: Check for successful notifications after ECR pushes.
 3. **Deployment Check**: Access deployed applications on each environment’s EC2 IP.
 
-## Troubleshooting
+## Troubleshooting:
 
 - **403 Error for ECR**: Verify IAM roles and ensure permissions for ECR actions.
 - **Pipeline Fails During Clone**: Check GitHub webhook and verify Git is installed on Jenkins agent.
