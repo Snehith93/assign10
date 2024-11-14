@@ -2,7 +2,7 @@ pipeline {
     agent { label 'slave-node' }
 
     environment {
-        ECR_REPO = 'public.ecr.aws/y8h2p9f1/snehith-assign10'          // Replace with actual ECR URL
+        ECR_REPO = '866934333672.dkr.ecr.ca-central-1.amazonaws.com/snehith/assign10'          // Replace with actual ECR URL
         IMAGE_NAME = 'flask-app'
         TAG = "${env.BRANCH_NAME}-${env.BUILD_ID}"
         PORT = "${env.BRANCH_NAME == 'DEV' ? '5001' : env.BRANCH_NAME == 'STAGING' ? '5002' : '5003'}"
