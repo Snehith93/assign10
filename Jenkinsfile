@@ -2,7 +2,7 @@ pipeline {
     agent { label 'node_slave' }
 
     environment {
-        ECR_REPO = 'public.ecr.aws/y8h2p9f1/snehith-assign10'          // Replace with your actual ECR URL
+        ECR_REPO = '866934333672.dkr.ecr.ca-central-1.amazonaws.com/snehith-assign10'          // Replace with your actual ECR URL
         IMAGE_NAME = 'flask-app'
         TAG = "${env.BRANCH_NAME}-${env.BUILD_ID}"
         PORT = "${env.BRANCH_NAME == 'dev' ? '5001' : env.BRANCH_NAME == 'staging' ? '5002' : '5003'}"
@@ -37,7 +37,7 @@ pipeline {
         stage('Push to ECR') {
             steps {
                 // Log in to ECR using the instance profile attached to the EC2 instance
-                sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${env.ECR_REPO}"
+                sh "aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin ${env.ECR_REPO}"
                 
                 // Push the Docker image to ECR with the branch-specific tag
                 sh "docker push ${env.ECR_REPO}:${env.TAG}"
