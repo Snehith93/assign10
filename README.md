@@ -1,7 +1,3 @@
-Here’s a detailed README file template tailored to your Jenkins CI/CD pipeline setup with AWS resources. This template includes all necessary sections, configurations, and instructions for setting up and maintaining the pipeline.
-
----
-
 # Jenkins Multi-Branch Pipeline CI/CD with AWS
 
 This project sets up a multi-branch Jenkins CI/CD pipeline on AWS, supporting development, staging, and production environments. The pipeline handles code build, scan, Docker image creation, ECR image storage, and deployment to EC2 instances, with GitHub webhooks for automated builds.
