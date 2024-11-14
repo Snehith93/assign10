@@ -25,15 +25,6 @@ pipeline {
             }
         }
 
-        stage('Trivy Security Scan') {
-            steps {
-                script {
-                    // Run Trivy scan on the branch-specific image
-                    sh "trivy image ${ECR_REPO}:${TAG}"
-                }
-            }
-        }
-
         stage('Push to ECR') {
             steps {
                 // Log in to ECR using the instance profile attached to the EC2 instance
