@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'node_slave' }
+    agent { label 'slave_node' }
 
     environment {
         ECR_REPO = 'public.ecr.aws/y8h2p9f1/snehith-assign10'          // Replace with your actual ECR URL
